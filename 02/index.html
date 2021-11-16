@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>first-test</title>
+  <link rel="stylesheet" href="index.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <!-- 课程表 -->
+  <div class="schedule">
+    <div v-for="(item, i) in arr" :key="i" :class="['item'+(i+1),item.class]">
+      <h3>{{item.day}}</h3>
+    </div>
+
+    <div v-for="(item, k) in clazz" :key="k" :class="['item'+(k+7),item.class]">
+      <h3>{{item.num}}</h3>
+      <p>{{item.time}}</p>
+    </div>
+
+    <div v-for="(item, index) in lesson" :key="index" :class="['item'+(index+17) ,item.class]"
+      :style="{background: item.Bgcolor}">
+      <h3>{{item.course}}</h3>
+      <p style="height:10%"></p>
+      <p>{{item.place}}</p>
+      <p>{{item.teacher}}</p>
+    </div>
+
+  </div>
+  <div class="message">
+  </div>
+</body>
+
+</html>
+
+<script src="index.js"></script>

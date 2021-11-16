@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+}
+
+a {
+  color: grey;
+  /*背景颜色*/
+  text-decoration: none;
+  /*去除文字的下划线*/
+}
+
+
+.schedule {
+  width: 450px;
+  height: 500px;
+  background-color: white;
+  margin-right: 15px;
+  padding: 20px;
+  border-radius: 4px;
+  float:left;
+  display: grid;
+  grid-template-columns: 10% 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 5% 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    'box1  box2  box3  box4  box5  box6'
+    'box7  box17 box20 box23 box26 box30'
+    'box8  box17 box20 box23 box26 box30'
+    'box9  box18 .     box24 box27 .'
+    'box10 box18 .     box24 box27 .'
+    'box11 .     .     .     box28 .'
+    'box12 .     .     .     box28 .'
+    'box13 box19 box21 box25 box29 .'
+    'box14 box19 box21 box25 box29 .'
+    'box15 .     box22 .     .     .'
+    'box16 .     box22 .     .     .';
+}
+
+.item1 {
+  grid-area: box1;
+}
+
+.item2 {
+  grid-area: box2;
+}
+
+.item3 {
+  grid-area: box3;
+}
+
+.item4 {
+  grid-area: box4;
+}
+
+.item5 {
+  grid-area: box5;
+}
+
+.item6 {
+  grid-area: box6;
+}
+
+.item7 {
+  grid-area: box7;
+}
+
+.item8 {
+  grid-area: box8;
+}
+
+.item9 {
+  grid-area: box9;
+}
+
+.item10 {
+  grid-area: box10;
+}
+
+.item11 {
+  grid-area: box11;
+}
+
+.item12 {
+  grid-area: box12;
+}
+
+.item13 {
+  grid-area: box13;
+}
+
+.item14 {
+  grid-area: box14;
+}
+
+.item15 {
+  grid-area: box15;
+}
+
+.item16 {
+  grid-area: box16;
+}
+
+.item17 {
+  grid-area: box17;
+}
+
+.item18 {
+  grid-area: box18;
+}
+
+.item19 {
+  grid-area: box19;
+}
+
+.item20 {
+  grid-area: box20;
+}
+
+.item21 {
+  grid-area: box21;
+}
+
+.item2 {
+  grid-area: box2;
+}
+
+.item22 {
+  grid-area: box22;
+}
+
+.item23 {
+  grid-area: box23;
+}
+
+.item24 {
+  grid-area: box24;
+}
+
+.item25 {
+  grid-area: box25;
+}
+
+.item26 {
+  grid-area: box26;
+}
+
+.item27 {
+  grid-area: box27;
+}
+
+.item28 {
+  grid-area: box28;
+}
+
+.item29 {
+  grid-area: box29;
+}
+
+.item30 {
+  grid-area: box30;
+}
+
+.week {
+  text-align: center;
+}
+
+.clazz {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+
+}
+
+.clazz h3 {
+  grid-row: 2 / 3;
+  text-align: center;
+  font-weight: normal;
+  font-size: 100%;
+}
+
+.clazz p {
+  grid-row: 3 / 4;
+  color: #969599;
+  font-size: 80%;
+  text-align: center;
+}
+
+.course {
+  padding: 10% 15%;
+  margin: 2%;
+  border: 1px solid #cac9ce;
+  border-radius: 5px;
+  color: antiquewhite;
+}
+
+.course h3 {
+  font-weight: normal;
+  font-size: 100%;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  /* 弹性伸缩盒子模型显示 */
+  display: -webkit-box;
+  /* 限制在一个块元素显示的文本的行数 */
+  -webkit-line-clamp: 3;
+  /* 设置或检索伸缩盒对象的子元素的排列方式 */
+  -webkit-box-orient: vertical;
+}
+
+
+.course p {
+  display: none;
+}
+
+.message{
+  margin:30px;
+  float:left;
+  font-weight: normal;
+  font-size: 24px;
+  overflow: hidden;
+  text-align: left;
+}
