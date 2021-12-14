@@ -1,0 +1,419 @@
+html {
+    background-color: #f5f5f5;
+}
+
+
+/* 设置 动画以及路径 */
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+
+/* 设置 参数动画提示悬浮框 */
+
+div.tooltip {
+    position: fixed;
+    text-align: center;
+    width: 60 px;
+    height: 36 px;
+    padding: 2 px;
+    background: #00a4ff;
+    border: 0 px;
+    border-radius: 18px;
+    pointer-events: none;
+}
+
+h2 {
+    width: 1500px;
+    height: 40px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+}
+
+.w {
+    width: 1500px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: #f5f5f5f5;
+}
+
+.main {
+    background: #fff;
+    position: relative;
+    /* background-color: brown; */
+}
+
+.canvas {
+    float: left;
+    background: #f1f1f1;
+    width: 600px;
+    height: 600px;
+    /* background: lightsteelblue; */
+}
+
+.interactive {
+    position: relative;
+    float: right;
+    width: 900px;
+    height: 600px;
+    /* background-color: blue; */
+}
+
+.val {
+    position: absolute;
+    width: 200px;
+    height: 35px;
+    font-size: 15px;
+    z-index: 50;
+}
+
+li,
+td {
+    color: black;
+}
+
+
+/* 设置 三大动画模块 */
+
+.animated_show {
+    position: absolute;
+    top: 0;
+    right:-900px;
+    width: auto;
+}
+
+.animated_show dl {
+    float: left;
+    /* border: solid 0.1px red; */
+}
+
+.animated_show dl dt {
+    height: 25px;
+    border-top: 1px solid #a39f9f;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    background: #f1f1f1;
+}
+
+.animated_show dl dd {
+    width: 300px;
+    height: 300px;
+    margin: 0;
+    border-bottom: 1px solid #a39f9f;
+    background: #f1f1f1;
+}
+
+.w1 {
+    width: 1500px;
+    margin: 0 auto;
+}
+
+
+/* 设置 按钮模块 */
+
+.button li {
+    float: left;
+    position: relative;
+    list-style: none;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    margin: 10px 30px 0 30px;
+    border-bottom: 1px solid #f5f5f5;
+    border-top: 1px solid #f5f5f5;
+    border-left: 1px solid #f5f5f5;
+    text-align: center;
+    background-color: #f1f1f1(187, 19, 19);
+    cursor: pointer;
+    z-index: 30;
+}
+
+.button li button {
+    position: absolute;
+    width: 40px;
+    left: 0;
+    right: 0;
+    border-radius: 5px;
+    border: 1px solid #00a1d6;
+    z-index: 30;
+}
+
+.button button:hover {
+    border-color: #3abde9;
+    background-color: #3abde9;
+}
+
+.button li:hover .button-con {
+    display: block;
+}
+
+.button .button-con {
+    background-color: #fff;
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    border-bottom: 1px solid #f5f5f5;
+    border-right: 1px solid #f5f5f5;
+    border-left: 1px solid #f5f5f5;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 130px;
+    /* height: 50px; */
+    text-align: center;
+    display: none;
+}
+
+.button-triangle {
+    width: 0px;
+    height: 0px;
+    line-height: 0;
+    font-size: 0;
+    border: 8px solid transparent;
+    border-bottom-color: #3abde9;
+}
+
+.button .button-con p {
+    margin: 0 auto 0;
+    line-height: 25px;
+    font-size: 15px;
+    color: #5e4c4c;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #3abde9;
+    text-align: center;
+}
+
+
+/* 设置 添加数据弹出模块 */
+
+.pop-up {
+    display: none;
+    width: 512px;
+    height: 280px;
+    position: fixed;
+    border: #ebebeb solid 1px;
+    border-radius: 20px;
+    left: 50%;
+    top: 50%;
+    background: #ffffff;
+    box-shadow: 0px 0px 20px #ddd;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.pop-up-title {
+    width: 100%;
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    font-size: 18px;
+    position: relative;
+    cursor: move;
+}
+
+.pop-up-input-content {
+    margin-top: 20px;
+}
+
+.confirm-Btn {
+    width: 50%;
+    margin: 10px auto 15px auto;
+    line-height: 40px;
+    font-size: 18px;
+    border: #ebebeb 1px solid;
+    text-align: center;
+}
+
+.confirm-Btn a {
+    display: block;
+}
+
+.pop-up-input input.list-input {
+    float: left;
+    line-height: 35px;
+    height: 35px;
+    width: 350px;
+    border: #ebebeb 1px solid;
+    text-indent: 5px;
+}
+
+.pop-up-input {
+    overflow: hidden;
+    margin: 0px 0px 20px 0px;
+}
+
+.pop-up-input label,
+.stelam-body label {
+    float: left;
+    width: 90px;
+    padding-right: 10px;
+    text-align: right;
+    line-height: 35px;
+    height: 35px;
+    font-size: 16px;
+}
+
+.pop-up-title span {
+    position: absolute;
+    font-size: 12px;
+    right: -20px;
+    top: -30px;
+    background: #ffffff;
+    border: #ebebeb solid 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.pop-up-bg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, .3);
+}
+
+
+/* 设置 右上角四大提示模块 */
+
+.tip1 {
+    display: none;
+    height: 325px;
+}
+
+.tip1 ol {
+    float: left;
+    width: 450px;
+}
+
+.tip1 ol li {
+    font-size: large;
+    line-height: 30px;
+    margin: 10px auto;
+}
+
+.tip1 img {
+    float: right;
+    width: 450px;
+}
+
+.tip2 {
+    display: none;
+}
+
+.tip2 ul li {
+    font-size: 14px;
+    line-height: 30px;
+    margin: auto;
+}
+
+.tip2 ul li span,
+.tip4 ul li span {
+    color: blue;
+}
+
+.tip3 {
+    display: none;
+}
+
+.tip3 table {
+    width: 500px;
+    margin: auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.tip3 td,
+.tip3 th {
+    border: 1px solid #333;
+}
+
+.tip3 thead tr {
+    height: 30px;
+}
+
+.bg {
+    background-color: pink;
+}
+
+.tip4 {
+    width: 550px;
+    margin: 15px auto;
+    display: none;
+}
+
+.tip4 ul li {
+    font-size: large;
+    line-height: 30px;
+    margin: 10px auto;
+}
+
+
+/* 设置lam模块 */
+
+.setlam {
+    display: block;
+    width: 512px;
+    height: 220px;
+    position: fixed;
+    border: #ebebeb solid 1px;
+    border-radius: 20px;
+    left: 50%;
+    top: 50%;
+    background: #ffffff;
+    box-shadow: 0px 0px 20px #ddd;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.setlam div {
+    overflow: hidden;
+}
+
+.setlam-title {
+    width: 100%;
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    font-size: 18px;
+    position: relative;
+    cursor: move;
+}
+
+.stelam-body {
+    margin-top: 30px;
+}
+
+.stelam-body input.inputlam {
+    float: left;
+    line-height: 35px;
+    height: 35px;
+    width: 350px;
+    border: #ebebeb 1px solid;
+    text-indent: 5px;
+}
+
+.setlam-submit {
+    width: 50%;
+    margin: 30px auto 15px auto;
+    line-height: 40px;
+    font-size: 18px;
+    border: #ebebeb 1px solid;
+    text-align: center;
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可视化之逻辑回归</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/base.css">
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="js/logistic.js"></script>
+    <!-- <script src="js/ahead.js"></script> -->
+    <script src="js/draw.js"></script>
+    <script src="js/trigger.js"></script>
+    <script src = "js/animate.js"></script>
+    <style>
+        .slider{
+            position: absolute;
+            right:0;
+            top:0;
+            width:35px;
+            height:145px;
+            font-size: 14px;
+            padding: 2px 10px;
+            background-color:cyan;
+            color:azure;
+            z-index:99;
+        }
+    </style>
+</head>
+
+<body bgcolor="#f5f5f5">
+
+    <h2>算法可视化平台之逻辑回归</h2>
+    <!-- 图像模块 -->
+    <div class="w">
+        <div class="main">
+            <!-- 算法图像 -->
+            <div class="canvas">
+                <span class="val" id="val"></span>
+            </div>
+            <div class = "slider">
+                参数动画展示←
+            </div>
+            <div class="interactive ">
+                <!-- 提示内容 -->
+                <div class="tip1">
+                    <ol>
+                        <li>1. 根据不同的分类画出不同形状(1为矩形，0为圆)</li>
+                        <li>2. 根据迭代过程中 当前参数作出分界直线
+                            <br> &nbspl：z(x) = w0 * x1 + w1 * x2 + b = 0 </li>
+                        <li>3. 将各点坐标分别带入z(x)函数 决定所画图形颜色(&nbsp&nbsp h
+                            <0.5为红，h>0.5为蓝) 以区分是否分类正确</li>
+                        <li>4. 依次迭代，直至所划分的阈值为止 </li>
+
+                    </ol>
+                    <div>
+                        <li><img src="img/draw.png"> </li>
+                    </div>
+                </div>
+                <!-- 迭代过程中参数以及中间计算结果 -->
+                <div class="tip2">
+                    <ul>
+                        <li>
+                            您设置的梯度上升步长α为：
+                            <span id="pre-α"></span>
+                        </li>
+                        <li>
+                            采用梯度上升法更新w和b:
+                            <img src="img/up.png" height="40" width="350" style="border: 0">
+                            <span id="pre-up"></span>
+                        </li>
+                        <li>
+                            当前参数 w1 =
+                            <span id="pre-w0"></span>
+                        </li>
+                        <li>
+                            当前参数 w2 =
+                            <span id="pre-w1"></span>
+                        </li>
+                        <li>
+                            当前参数 b &nbsp &nbsp=
+                            <span id="pre-b"></span>
+                        </li>
+                        <li>
+                            x = w0 *x1 + w1 * x2 + b &nbsp
+                            <span id="pre-x"></span>
+                        </li>
+                        <li>
+                            logistic函数: Π(x)= 1 / (1 + e^(-x)) = e^(x) / (1 + e^(x))&nbsp
+                            <span id="pre-logistic"></span>
+                        </li>
+                        <li>
+                            对数似然函数:
+                            <img src="img/lw1.png" height="40" width="350" style="border: 0">
+                            <img src="img/lw2.png" height="40" width="175" style="border: 0">=
+                            <span id="pre-Lw"></span>
+                        </li>
+                </div>
+                <!-- 运行最终结果参数 -->
+                <div class="tip3">
+                    <table cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>w0</th>
+                                <th>w1</th>
+                                <th>b</th>
+                                <th>斜率</th>
+                                <th>截距</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 判断提示信息 -->
+                <div class="tip4">
+                    <ul>
+                        <li>
+                            当前参数w1 =
+                            <span id="py-w0"></span>
+                        </li>
+                        <li>
+                            当前参数w2 =
+                            <span id="py-w1"></span>
+                        </li>
+                        <li>
+                            当前参数b =
+                            <span id="py-b"></span>
+                        </li>
+                        <li>
+                            P(Y=1 | x)= 1 / (1 + e^(-x)) = exp(x) / (1 + exp(x))=&nbsp
+                            <span id="py1"></span>
+                        </li>
+                        <li>
+                            P(Y=0 | x)=1 / (1 + exp(x))=&nbsp
+                            <span id="py0"></span>
+                        </li>
+                        <li>
+                            因为P(Y=1 | x) &nbsp <span id="py-judge"></span>&nbsp P(Y=0 | x)，则预测分类为：&nbsp
+                            <span id="py-result"></span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 三个参数图像 -->
+                <div class="animated_show">
+                    <dl id="dl1">
+                        <dt>参数w0动画展示</dt>
+                        <dd id="interactive1">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>参数w1动画展示</dt>
+                        <dd id="interactive2">
+
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>参数b动画展示</dt>
+                        <dd id="interactive3">
+
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 按钮模块 -->
+    <div class="w1">
+        <ul class="button">
+            <li>
+                <button type="button " class="start" id="start">start</button>
+                <div class="button-con">
+                    <div class="button-triangle">
+                    </div>
+                    <p>开始描点画线分类</p>
+                </div>
+            </li>
+            <li class="current">
+                <button type="button " class="last " id="last">last</button>
+                <div class="button-con">
+                    <div class="button-triangle">
+                    </div>
+                    <p>上一步过程画图</p>
+                </div>
+            </li>
+            <li class="current">
+                <button type="button " class="next " id="next">next</button>
+                <div class="button-con">
+                    <div class="button-triangle">
+                    </div>
+                    <p>下一步过程画图</p>
+                </div>
+            </li>
+            <li class="current">
+                <button type="button " class="end " id="end">end</button>
+                <div class="button-con">
+                    <div class="button-triangle">
+                    </div>
+                    <p>分类最终结果画图</p>
+                </div>
+            </li>
+            <li class="current">
+                <button type="button" id="add" class="add">add</button>
+                <div class="button-con">
+                    <div class="button-triangle">
+                    </div>
+                    <p>添加样本数据，重新进行分类画图</p>
+                </div>
+            </li>
+            <li class="current">
+                <button type="button" id="judge" class="judge">judge</button>
+                <div class="button-con">
+                    <div class="button-triangle">
+                    </div>
+                    <p>判断数据分类，验证算法分类是否正确</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 修改数据弹出框-->
+    <div id="pop-up" class="pop-up">
+        <div id="title" class="pop-up-title">添加数据
+            <span><a id="closeBtn" href="javascript:void(0);" class="close-pop-up">关闭</a></span>
+        </div>
+        <div class="pop-up-input-content">
+            <div class="pop-up-input">
+                <label>X坐标：</label>
+                <input type="text" placeholder="请输入不大于1的数" id="cx" class="list-input">
+            </div>
+            <div class="pop-up-input">
+                <label>Y坐标：</label>
+                <input type="text" placeholder="请输入不大于1的数" id="cy" class="list-input">
+            </div>
+            <div class="pop-up-input" id="category">
+                <label id="category-just">所属类别：</label>
+                <input type="text" placeholder="请输入1/0" id="category-val" class="list-input">
+            </div>
+        </div>
+
+        <div id="confirm-Btn" class="confirm-Btn">确认 </div>
+    </div>
+
+    <!-- 输入梯度步长提示框 -->
+    <div id="setlam" class="setlam">
+        <div class="setlam-title">
+            请设置本次实验迭代的上升梯度步长α
+        </div>
+        <div class="stelam-body">
+            <label>
+                α: 
+            </label> <input type="text" placeholder="请输入0.1~0.5之间的两位小数" class="inputlam" id="inputlam" maxlength="4" οnkeyup="if(this.value.length==1){this.value=this.value.replace(/[^19]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-19]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+        </div>
+        <div class="setlam-submit">
+            提交
+        </div>
+
+    </div>
+
+    <!-- 遮盖层 -->
+    <div id=" bg " class="pop-up-bg "></div>
+
+    <!-- <script src="js/logistic.js"></scrip>-->
+    <!-- <script src="js/ahead.js"></script> -->
+    <!-- <script src="js/draw.js"></script> -->
+
+    <script>
+        //画布
+        var svg1 = d3.select(".canvas ")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        var svg2 = d3.select("#interactive1 ")
+            .append("svg")
+            .attr("width", width1)
+            .attr("height", height1);
+        var svg3 = d3.select("#interactive2 ")
+            .append("svg")
+            .attr("width", width1)
+            .attr("height", height1);
+        var svg4 = d3.select("#interactive3 ")
+            .append("svg")
+            .attr("width", width1)
+            .attr("height", height1);
+
+        var animated_show = document.querySelector('.animated_show');
+        var slider = document.querySelector(".slider");
+
+        slider.addEventListener('mouseenter', function() {           
+            animate(animated_show, 0, function() {              
+                slider.innerHTML = '参数动画展示→';
+            });
+
+        })
+        slider.addEventListener('click', function() {      
+            animate(animated_show, 900, function() {
+                slider.innerHTML = '参数动画展示←';
+            });
+        })
+    </script>
+
+</body>
+
+</html>
